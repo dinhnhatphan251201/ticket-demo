@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHSoft - Hệ thống Ticket Hỗ trợ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+            min-height: 100vh;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0ea5e9;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo::before {
+            content: "🎧";
+            font-size: 36px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+        }
+
+        .user-name {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Login Styles */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="20" cy="60" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="80" cy="40" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 50px;
+            width: 480px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header .logo {
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        .login-header h2 {
+            color: #1e293b;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .login-header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+            background: white;
+        }
+
+        .form-control::placeholder {
+            color: #9ca3af;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            min-height: 700px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            padding: 35px 35px 30px;
+            border-bottom: 2px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .content-header h1 {
+            color: #1e293b;
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .content-body {
+            padding: 35px;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 35px;
+            background: #f8fafc;
+            padding: 8px;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .nav-tab {
+            padding: 15px 25px;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #64748b;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .nav-tab:hover:not(.active) {
+            background: #e2e8f0;
+            color: #374151;
+        }
+
+        /* Create Ticket Form */
+        .ticket-form {
+            max-width: 900px;
+            background: #f8fafc;
+            padding: 35px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .form-control.textarea {
+            min-height: 140px;
+            resize: vertical;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+
+        .form-control select {
+            cursor: pointer;
+        }
+
+        /* Priority Selection */
+        .priority-select {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .priority-option {
+            padding: 20px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .priority-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .priority-option.low {
+            border-color: #10b981;
+        }
+
+        .priority-option.low.selected {
+            background: #10b981;
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .priority-option.medium {
+            border-color: #f59e0b;
+        }
+
+        .priority-option.medium.selected {
+            background: #f59e0b;
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .priority-option.high {
+            border-color: #ef4444;
+        }
+
+        .priority-option.high.selected {
+            background: #ef4444;
+            color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Ticket List */
+        .ticket-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .ticket-item {
+            background: #ffffff;
+            border: 2px solid #f1f5f9;
+            border-radius: 16px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ticket-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .ticket-item:hover {
+            border-color: #0ea5e9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15);
+        }
+
+        .ticket-item:hover::before {
+            background: #0ea5e9;
+            width: 6px;
+        }
+
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .ticket-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .ticket-id {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .ticket-status {
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-open {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            color: #1e40af;
+        }
+
+        .status-in-progress {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #b45309;
+        }
+
+        .status-closed {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #166534;
+        }
+
+        .ticket-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .ticket-meta-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .priority-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .priority-low {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #166534;
+        }
+
+        .priority-medium {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #b45309;
+        }
+
+        .priority-high {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #dc2626;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 95%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 30px 35px;
+            border-bottom: 2px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .modal-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .close-btn {
+            background: #f1f5f9;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: #64748b;
+        }
+
+        .close-btn:hover {
+            background: #e2e8f0;
+            color: #374151;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 35px;
+        }
+
+        .ticket-detail {
+            display: grid;
+            gap: 25px;
+        }
+
+        .detail-section {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .detail-section h3 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: #374151;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            color: #1e293b;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .detail-description {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #166534;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #86efac;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .success-message::before {
+            content: "✓";
+            width: 24px;
+            height: 24px;
+            background: #166534;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Error Message */
+        .error-message {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #dc2626;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #f87171;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .error-message::before {
+            content: "⚠";
+            width: 24px;
+            height: 24px;
+            background: #dc2626;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #374151;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            max-width: 400px;
+            margin: 0 auto 30px;
+            line-height: 1.5;
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f1f5f9;
+            border-top: 4px solid #0ea5e9;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 100%;
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .content-header {
+                padding: 25px;
+            }
+            
+            .content-body {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-box {
+                width: 95%;
+                padding: 30px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .priority-select {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .content-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div id="loginScreen">
+            <div class="login-container">
+                <div class="login-box">
+                    <div class="login-header">
+                        <div class="logo">DHSoft</div>
+                        <h2>Đăng nhập hệ thống</h2>
+                        <p>Hệ thống hỗ trợ khách hàng</p>
+                    </div>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="username">Tên đăng nhập</label>
+                            <input type="text" id="username" class="form-control" placeholder="Nhập tên đăng nhập" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu" required>
+                        </div>
+                        <div id="loginError" class="error-message hidden">
+                            Tên đăng nhập hoặc mật khẩu không đúng!
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 18px; font-size: 16px; font-weight: 600;">
+                            🔐 Đăng nhập
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Application -->
+        <div id="mainApp" class="hidden">
+            <div class="header">
+                <div class="logo">DHSoft Support</div>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <span class="user-name" id="userName">User</span>
+                    <button class="btn btn-secondary" onclick="logout()">
+                        🚪 Đăng xuất
+                    </button>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="content-header">
+                    <h1 id="pageTitle">Danh sách Tickets</h1>
+                    <button class="btn btn-primary" onclick="showCreateTicket()">
+                        ➕ Tạo Ticket mới
+                    </button>
+                </div>
+
+                <div class="content-body">
+                    <div class="nav-tabs">
+                        <button class="nav-tab active" onclick="showTicketList()">
+                            📋 Danh sách Tickets
+                        </button>
+                        <button class="nav-tab" onclick="showCreateTicket()">
+                            ➕ Tạo Ticket
+                        </button>
+                    </div>
+
+                    <!-- Ticket List View -->
+                    <div id="ticketListView">
+                        <div id="ticketListContainer">
+                            <div class="ticket-list" id="ticketList">
+                                <!-- Tickets will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Create Ticket View -->
+                    <div id="createTicketView" class="hidden">
+                        <div id="successMessage" class="success-message hidden">
+                            Ticket đã được tạo thành công! Chúng tôi sẽ phản hồi trong thời gian sớm nhất.
+                        </div>
+                        
+                        <form class="ticket-form" id="ticketForm">
+                            <h2 style="margin-bottom: 30px; color: #1e293b; font-size: 24px;">📝 Tạo Ticket Hỗ trợ</h2>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="ticketTitle">Tiêu đề vấn đề *</label>
+                                    <input type="text" id="ticketTitle" class="form-control" 
+                                           placeholder="Nhập tiêu đề mô tả vấn đề" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ticketCategory">Danh mục hỗ trợ</label>
+                                    <select id="ticketCategory" class="form-control">
+                                        <option value="technical">🔧 Hỗ trợ kỹ thuật</option>
+                                        <option value="billing">💳 Thanh toán & Hóa đơn</option>
+                                        <option value="account">👤 Tài khoản & Bảo mật</option>
+                                        <option value="feature">✨ Yêu cầu tính năng</option>
+                                        <option value="general">📞 Hỗ trợ tổng quát</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Mức độ ưu tiên</label>
+                                <div class="priority-select" id="prioritySelect">
+                                    <div class="priority-option low" data-priority="low">
+                                        <div style="font-size: 20px; margin-bottom: 8px;">🟢</div>
+                                        <strong>Thấp</strong><br>
+                                        <small>Không gấp, có thể đợi</small>
+                                    </div>
+                                    <div class="priority-option medium selected" data-priority="medium">
+                                        <div style="font-size: 20px; margin-bottom: 8px;">🟡</div>
+                                        <strong>Trung bình</strong><br>
+                                        <small>Ưu tiên bình thường</small>
+                                    </div>
+                                    <div class="priority-option high" data-priority="high">
+                                        <div style="font-size: 20px; margin-bottom: 8px;">🔴</div>
+                                        <strong>Cao</strong><br>
+                                        <small>Rất gấp, cần xử lý ngay</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-full">
+                                <label for="ticketDescription">Mô tả chi tiết *</label>
+                                <textarea id="ticketDescription" class="form-control textarea" placeholder="Mô tả chi tiết vấn đề bạn gặp phải..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="margin-top: 20px;">
+                                🚀 Gửi Ticket
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ticket Detail Modal -->
+        <div class="modal" id="ticketDetailModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title" id="modalTicketTitle">Chi tiết Ticket</span>
+                    <button class="close-btn" onclick="closeTicketModal()">×</button>
+                </div>
+                <div class="modal-body" id="modalTicketBody">
+                    <!-- Ticket details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple local "database"
+        let tickets = [];
+        let currentUser = null;
+        let ticketIdCounter = 1;
+
+        // Dummy user for demo
+        const demoUser = {
+            username: "admin",
+            password: "123456",
+            name: "Admin",
+        };
+
+        // Login logic
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            if (username === demoUser.username && password === demoUser.password) {
+                currentUser = demoUser;
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('mainApp').classList.remove('hidden');
+                document.getElementById('userName').textContent = demoUser.name;
+                document.getElementById('userAvatar').textContent = demoUser.name[0].toUpperCase();
+                showTicketList();
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+            }
+        });
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('loginForm').reset();
+            document.getElementById('loginError').classList.add('hidden');
+        }
+
+        // Tab navigation
+        function showTicketList() {
+            document.getElementById('pageTitle').textContent = "Danh sách Tickets";
+            document.getElementById('ticketListView').classList.remove('hidden');
+            document.getElementById('createTicketView').classList.add('hidden');
+            setActiveTab(0);
+            renderTicketList();
+        }
+
+        function showCreateTicket() {
+            document.getElementById('pageTitle').textContent = "Tạo Ticket mới";
+            document.getElementById('ticketListView').classList.add('hidden');
+            document.getElementById('createTicketView').classList.remove('hidden');
+            setActiveTab(1);
+            document.getElementById('ticketForm').reset();
+            document.getElementById('successMessage').classList.add('hidden');
+            // Reset priority selection
+            document.querySelectorAll('.priority-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector('.priority-option.medium').classList.add('selected');
+        }
+
+        function setActiveTab(idx) {
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach((tab, i) => {
+                if (i === idx) tab.classList.add('active');
+                else tab.classList.remove('active');
+            });
+        }
+
+        // Priority selection
+        document.querySelectorAll('.priority-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.priority-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Ticket form submission
+        document.getElementById('ticketForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('ticketTitle').value.trim();
+            const category = document.getElementById('ticketCategory').value;
+            const description = document.getElementById('ticketDescription').value.trim();
+            const priority = document.querySelector('.priority-option.selected').getAttribute('data-priority');
+            if (!title || !description) return;
+
+            const ticket = {
+                id: ticketIdCounter++,
+                title,
+                category,
+                description,
+                priority,
+                status: "open",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                user: currentUser ? currentUser.name : "Khách",
+            };
+            tickets.unshift(ticket);
+
+            document.getElementById('successMessage').classList.remove('hidden');
+            this.reset();
+            // Reset priority selection
+            document.querySelectorAll('.priority-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector('.priority-option.medium').classList.add('selected');
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.add('hidden');
+                showTicketList();
+            }, 1200);
+        });
+
+        // Render ticket list
+        function renderTicketList() {
+            const list = document.getElementById('ticketList');
+            list.innerHTML = '';
+            if (tickets.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <h3>Chưa có ticket nào!</h3>
+                        <p>Bạn có thể tạo ticket mới để nhận hỗ trợ từ đội ngũ DHSoft.</p>
+                    </div>
+                `;
+                return;
+            }
+            tickets.forEach(ticket => {
+                const statusClass = {
+                    open: 'status-open',
+                    'in-progress': 'status-in-progress',
+                    closed: 'status-closed'
+                }[ticket.status] || 'status-open';
+                const priorityClass = {
+                    low: 'priority-low',
+                    medium: 'priority-medium',
+                    high: 'priority-high'
+                }[ticket.priority] || 'priority-medium';
+                list.innerHTML += `
+                    <div class="ticket-item" onclick="showTicketDetail(${ticket.id})">
+                        <div class="ticket-header">
+                            <div>
+                                <div class="ticket-title">${escapeHTML(ticket.title)}</div>
+                                <div class="ticket-id">#${ticket.id}</div>
+                            </div>
+                            <div class="ticket-status ${statusClass}">
+                                ${ticket.status === 'open' ? 'Mở' : ticket.status === 'in-progress' ? 'Đang xử lý' : 'Đã đóng'}
+                            </div>
+                        </div>
+                        <div class="ticket-meta">
+                            <div class="ticket-meta-left">
+                                <span class="priority-badge ${priorityClass}">
+                                    ${ticket.priority === 'low' ? 'Thấp' : ticket.priority === 'medium' ? 'Trung bình' : 'Cao'}
+                                </span>
+                                <span>🗂️ ${getCategoryLabel(ticket.category)}</span>
+                            </div>
+                            <span>🕒 ${formatDate(ticket.createdAt)}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Show ticket detail modal
+        function showTicketDetail(id) {
+            const ticket = tickets.find(t => t.id === id);
+            if (!ticket) return;
+            document.getElementById('modalTicketTitle').textContent = `Ticket #${ticket.id} - ${ticket.title}`;
+            document.getElementById('modalTicketBody').innerHTML = `
+                <div class="ticket-detail">
+                    <div class="detail-section">
+                        <h3>📝 Thông tin Ticket</h3>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Người tạo</span>
+                                <span class="detail-value">${escapeHTML(ticket.user)}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Ngày tạo</span>
+                                <span class="detail-value">${formatDate(ticket.createdAt, true)}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Danh mục</span>
+                                <span class="detail-value">${getCategoryLabel(ticket.category)}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Mức ưu tiên</span>
+                                <span class="detail-value">${getPriorityLabel(ticket.priority)}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Trạng thái</span>
+                                <span class="detail-value">${getStatusLabel(ticket.status)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3>📄 Mô tả chi tiết</h3>
+                        <div class="detail-description">${escapeHTML(ticket.description)}</div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('ticketDetailModal').classList.add('show');
+        }
+
+        function closeTicketModal() {
+            document.getElementById('ticketDetailModal').classList.remove('show');
+        }
+
+        // Utility functions
+        function getCategoryLabel(val) {
+            switch(val) {
+                case 'technical': return '🔧 Hỗ trợ kỹ thuật';
+                case 'billing': return '💳 Thanh toán & Hóa đơn';
+                case 'account': return '👤 Tài khoản & Bảo mật';
+                case 'feature': return '✨ Yêu cầu tính năng';
+                case 'general': return '📞 Hỗ trợ tổng quát';
+                default: return val;
+            }
+        }
+        function getPriorityLabel(val) {
+            switch(val) {
+                case 'low': return 'Thấp';
+                case 'medium': return 'Trung bình';
+                case 'high': return 'Cao';
+                default: return val;
+            }
+        }
+        function getStatusLabel(val) {
+            switch(val) {
+                case 'open': return 'Mở';
+                case 'in-progress': return 'Đang xử lý';
+                case 'closed': return 'Đã đóng';
+                default: return val;
+            }
+        }
+        function formatDate(date, showTime) {
+            const d = new Date(date);
+            const pad = n => n < 10 ? '0' + n : n;
+            let str = `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`;
+            if (showTime) str += ` ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+            return str;
+        }
+        function escapeHTML(str) {
+            return String(str).replace(/[&<>"']/g, function(m) {
+                return ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                })[m];
+            });
+        }
+
+        // Close modal on outside click
+        document.getElementById('ticketDetailModal').addEventListener('click', function(e) {
+            if (e.target === this) closeTicketModal();
+        });
+
+        // Keyboard: ESC to close modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") closeTicketModal();
+        });
+
+        // Auto focus on login
+        window.onload = function() {
+            document.getElementById('username').focus();
+        };
+    </script>
+</body>
+</html>
