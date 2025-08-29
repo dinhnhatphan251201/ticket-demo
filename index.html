@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DHSoft - Hệ thống Ticket Hỗ trợ</title>
+    <title>Golden Bay Buffet - Nhà hàng buffet cao cấp</title>
     <style>
         * {
             margin: 0;
@@ -12,1222 +12,802 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
-            min-height: 100vh;
-            color: #1e293b;
-            overflow-x: hidden;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            min-height: 100vh;
+            padding: 0 20px;
         }
 
-        /* Header Styles */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 16px;
-            padding: 20px 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #d4a574 0%, #b8935a 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .logo {
-            font-size: 32px;
-            font-weight: 700;
-            color: #0ea5e9;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #fff, #f0e6d2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .logo::before {
-            content: "🎧";
-            font-size: 36px;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
         }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .user-avatar {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #0ea5e9, #0284c7);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .nav-links a {
             color: white;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
-        }
-
-        .user-name {
-            font-weight: 500;
-            color: #374151;
-        }
-
-        /* Button Styles */
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .btn::before {
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23d4a574" width="1200" height="600"/><circle fill="%23b8935a" cx="200" cy="150" r="50"/><circle fill="%23b8935a" cx="800" cy="400" r="80"/><circle fill="%23e6c896" cx="1000" cy="100" r="40"/><rect fill="%23f0e6d2" x="100" y="300" width="200" height="100" rx="10"/><rect fill="%23f0e6d2" x="700" y="200" width="150" height="80" rx="8"/></svg>');
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #d4a574, #b8935a);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 165, 116, 0.4);
+            animation: fadeInUp 1s ease 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.6);
+        }
+
+        .cta-button::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s;
         }
 
-        .btn:hover::before {
+        .cta-button:hover::before {
             left: 100%;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #0ea5e9, #0284c7);
-            color: white;
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+        /* Sections */
+        section {
+            padding: 4rem 0;
         }
 
-        .btn-secondary {
-            background: #f1f5f9;
-            color: #475569;
-            border: 1px solid #e2e8f0;
-        }
-
-        .btn-secondary:hover {
-            background: #e2e8f0;
-            transform: translateY(-1px);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
-        }
-
-        /* Login Styles */
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #d4a574;
+            margin-bottom: 3rem;
             position: relative;
         }
 
-        .login-container::before {
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #d4a574, #b8935a);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-left: 4px solid #d4a574;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #d4a574;
+            margin-bottom: 1rem;
+        }
+
+        /* Ticket Types */
+        .tickets {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 4rem 0;
+        }
+
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .ticket-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ticket-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="20" cy="60" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="80" cy="40" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            height: 5px;
+            background: linear-gradient(45deg, #d4a574, #b8935a);
         }
 
-        .login-box {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 50px;
-            width: 480px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            z-index: 1;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .login-header .logo {
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 36px;
-        }
-
-        .login-header h2 {
-            color: #1e293b;
-            font-size: 28px;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .login-header p {
-            color: #64748b;
-            font-size: 16px;
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #374151;
-            font-size: 14px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 15px 18px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #0ea5e9;
-            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
-            background: white;
-        }
-
-        .form-control::placeholder {
-            color: #9ca3af;
-        }
-
-        /* Main Content */
-        .main-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            min-height: 700px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-        }
-
-        .content-header {
-            padding: 35px 35px 30px;
-            border-bottom: 2px solid #f1f5f9;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-        }
-
-        .content-header h1 {
-            color: #1e293b;
-            font-size: 32px;
-            font-weight: 600;
-        }
-
-        .content-body {
-            padding: 35px;
-        }
-
-        /* Navigation Tabs */
-        .nav-tabs {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 35px;
-            background: #f8fafc;
-            padding: 8px;
-            border-radius: 15px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .nav-tab {
-            padding: 15px 25px;
-            background: transparent;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            color: #64748b;
-            transition: all 0.3s ease;
-            flex: 1;
-            text-align: center;
-        }
-
-        .nav-tab.active {
-            background: linear-gradient(135deg, #0ea5e9, #0284c7);
-            color: white;
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
-            transform: translateY(-1px);
-        }
-
-        .nav-tab:hover:not(.active) {
-            background: #e2e8f0;
-            color: #374151;
-        }
-
-        /* Create Ticket Form */
-        .ticket-form {
-            max-width: 900px;
-            background: #f8fafc;
-            padding: 35px;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .form-group-full {
-            grid-column: 1 / -1;
-        }
-
-        .form-control.textarea {
-            min-height: 140px;
-            resize: vertical;
-            font-family: inherit;
-            line-height: 1.5;
-        }
-
-        .form-control select {
-            cursor: pointer;
-        }
-
-        /* Priority Selection */
-        .priority-select {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .priority-option {
-            padding: 20px 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .priority-option:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .priority-option.low {
-            border-color: #10b981;
-        }
-
-        .priority-option.low.selected {
-            background: #10b981;
-            color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-        }
-
-        .priority-option.medium {
-            border-color: #f59e0b;
-        }
-
-        .priority-option.medium.selected {
-            background: #f59e0b;
-            color: white;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-        }
-
-        .priority-option.high {
-            border-color: #ef4444;
-        }
-
-        .priority-option.high.selected {
-            background: #ef4444;
-            color: white;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-        }
-
-        /* Ticket List */
-        .ticket-list {
-            display: grid;
-            gap: 20px;
-        }
-
-        .ticket-item {
-            background: #ffffff;
-            border: 2px solid #f1f5f9;
-            border-radius: 16px;
-            padding: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ticket-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: #e2e8f0;
-            transition: all 0.3s ease;
-        }
-
-        .ticket-item:hover {
-            border-color: #0ea5e9;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15);
-        }
-
-        .ticket-item:hover::before {
-            background: #0ea5e9;
-            width: 6px;
+        .ticket-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
         .ticket-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
-        .ticket-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 8px;
-            line-height: 1.3;
+        .ticket-name {
+            font-size: 1.8rem;
+            color: #d4a574;
+            margin-bottom: 0.5rem;
         }
 
-        .ticket-id {
-            font-size: 14px;
-            color: #64748b;
-            font-weight: 500;
+        .ticket-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #b8935a;
+            margin-bottom: 1rem;
         }
 
-        .ticket-status {
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .ticket-description {
+            color: #666;
+            margin-bottom: 1.5rem;
         }
 
-        .status-open {
-            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-            color: #1e40af;
+        .menu-items {
+            list-style: none;
         }
 
-        .status-in-progress {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            color: #b45309;
+        .menu-items li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            position: relative;
+            padding-left: 1.5rem;
         }
 
-        .status-closed {
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            color: #166534;
-        }
-
-        .ticket-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #64748b;
-            font-size: 14px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #f1f5f9;
-        }
-
-        .ticket-meta-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .priority-badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .priority-low {
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            color: #166534;
-        }
-
-        .priority-medium {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            color: #b45309;
-        }
-
-        .priority-high {
-            background: linear-gradient(135deg, #fee2e2, #fecaca);
-            color: #dc2626;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
+        .menu-items li::before {
+            content: '✓';
+            color: #d4a574;
+            font-weight: bold;
+            position: absolute;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
         }
 
-        .modal.show {
-            display: flex;
-        }
-
-        .modal-content {
+        /* Booking Form */
+        .booking {
             background: white;
+            padding: 4rem 0;
+        }
+
+        .form-container {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 3rem;
             border-radius: 20px;
-            width: 95%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-            animation: modalSlideIn 0.3s ease-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .modal-header {
-            padding: 30px 35px;
-            border-bottom: 2px solid #f1f5f9;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-        }
-
-        .modal-title {
-            font-size: 26px;
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        .close-btn {
-            background: #f1f5f9;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            color: #64748b;
-        }
-
-        .close-btn:hover {
-            background: #e2e8f0;
-            color: #374151;
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            padding: 35px;
-        }
-
-        .ticket-detail {
-            display: grid;
-            gap: 25px;
-        }
-
-        .detail-section {
-            background: #f8fafc;
-            padding: 25px;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .detail-section h3 {
-            color: #1e293b;
-            margin-bottom: 20px;
-            font-size: 20px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .detail-grid {
+        .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .detail-item {
+        .form-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
         }
 
-        .detail-label {
-            font-weight: 500;
-            color: #374151;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
         }
 
-        .detail-value {
-            color: #1e293b;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-
-        .detail-description {
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            white-space: pre-wrap;
-            line-height: 1.6;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4a574;
+            box-shadow: 0 0 10px rgba(212, 165, 116, 0.3);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #d4a574, #b8935a);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 165, 116, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #333 0%, #222 100%);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #d4a574;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #d4a574;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 1rem;
+            color: #999;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ticket-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Success Message */
         .success-message {
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            color: #166534;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            border: 1px solid #86efac;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
-        }
-
-        .success-message::before {
-            content: "✓";
-            width: 24px;
-            height: 24px;
-            background: #166534;
+            background: linear-gradient(135deg, #28a745, #20c997);
             color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        /* Error Message */
-        .error-message {
-            background: linear-gradient(135deg, #fee2e2, #fecaca);
-            color: #dc2626;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            border: 1px solid #f87171;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
-        }
-
-        .error-message::before {
-            content: "⚠";
-            width: 24px;
-            height: 24px;
-            background: #dc2626;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        /* Utility Classes */
-        .hidden {
-            display: none !important;
-        }
-
-        .text-center {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
             text-align: center;
+            display: none;
+            animation: slideDown 0.5s ease;
         }
 
-        .mt-20 {
-            margin-top: 20px;
-        }
-
-        .mb-20 {
-            margin-bottom: 20px;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #64748b;
-        }
-
-        .empty-state-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-            opacity: 0.5;
-        }
-
-        .empty-state h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #374151;
-        }
-
-        .empty-state p {
-            font-size: 16px;
-            max-width: 400px;
-            margin: 0 auto 30px;
-            line-height: 1.5;
-        }
-
-        /* Loading State */
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f1f5f9;
-            border-top: 4px solid #0ea5e9;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .container {
-                max-width: 100%;
-                padding: 15px;
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
             }
-            
-            .header {
-                padding: 15px 20px;
-            }
-            
-            .content-header {
-                padding: 25px;
-            }
-            
-            .content-body {
-                padding: 25px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .login-box {
-                width: 95%;
-                padding: 30px;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .priority-select {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-tabs {
-                flex-direction: column;
-            }
-            
-            .content-header {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Login Screen -->
-        <div id="loginScreen">
-            <div class="login-container">
-                <div class="login-box">
-                    <div class="login-header">
-                        <div class="logo">DHSoft</div>
-                        <h2>Đăng nhập hệ thống</h2>
-                        <p>Hệ thống hỗ trợ khách hàng</p>
+    <header>
+        <nav class="container">
+            <div class="logo">🦐 GOLDEN BAY BUFFET</div>
+            <ul class="nav-links">
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#about">Giới thiệu</a></li>
+                <li><a href="#tickets">Thực đơn</a></li>
+                <li><a href="#booking">Đặt bàn</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>GOLDEN BAY BUFFET</h1>
+            <p>Trải nghiệm ẩm thực buffet hải sản cao cấp</p>
+            <a href="#booking" class="cta-button">Đặt bàn ngay</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 class="section-title fade-in">Giới thiệu về chúng tôi</h2>
+        <div class="about fade-in">
+            <div class="about-content">
+                <div class="about-text">
+                    <h3 style="color: #d4a574; margin-bottom: 1rem;">Chào mừng đến với Golden Bay Buffet</h3>
+                    <p>Golden Bay Buffet tự hào là nhà hàng buffet hải sản cao cấp hàng đầu tại thành phố. Với không gian sang trọng, phong cách phục vụ chuyên nghiệp và thực đơn đa dạng với hơn 200 món ăn từ khắp nơi trên thế giới.</p>
+                    
+                    <p>Chúng tôi cam kết mang đến cho quý khách những trải nghiệm ẩm thực tuyệt vời nhất với nguyên liệu tươi ngon được chọn lọc kỹ càng, đội ngũ đầu bếp giàu kinh nghiệm và không gian dịch vụ 5 sao.</p>
+                </div>
+                
+                <div class="about-features">
+                    <div class="feature">
+                        <div class="feature-icon">🦞</div>
+                        <h4>Hải sản tươi sống</h4>
+                        <p>Nguồn hải sản tươi ngon nhập khẩu trực tiếp</p>
                     </div>
-                    <form id="loginForm">
+                    <div class="feature">
+                        <div class="feature-icon">👨‍🍳</div>
+                        <h4>Đầu bếp chuyên nghiệp</h4>
+                        <p>Đội ngũ đầu bếp giàu kinh nghiệm quốc tế</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🏆</div>
+                        <h4>Không gian sang trọng</h4>
+                        <p>Thiết kế hiện đại, phục vụ chuyên nghiệp</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⭐</div>
+                        <h4>Chất lượng 5 sao</h4>
+                        <p>Cam kết chất lượng và dịch vụ tốt nhất</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tickets" class="tickets">
+        <div class="container">
+            <h2 class="section-title fade-in">Thực đơn & Bảng giá</h2>
+            <div class="ticket-grid fade-in">
+                <div class="ticket-card">
+                    <div class="ticket-header">
+                        <h3 class="ticket-name">VÉ BUFFET TRƯA</h3>
+                        <div class="ticket-price">399.000₫</div>
+                        <p class="ticket-description">Thời gian: 11:00 - 14:00 | Phù hợp cho gia đình</p>
+                    </div>
+                    <ul class="menu-items">
+                        <li>Buffet hải sản tươi sống (tôm, cua, sò điệp)</li>
+                        <li>Sashimi & Sushi Nhật Bản</li>
+                        <li>Nướng BBQ Hàn Quốc</li>
+                        <li>Lẩu Thái chua cay</li>
+                        <li>Món Âu (pasta, pizza, steak)</li>
+                        <li>Dimsum Hongkong</li>
+                        <li>Tráng miệng & kem</li>
+                        <li>Nước uống không giới hạn</li>
+                        <li>Trái cây tươi theo mùa</li>
+                    </ul>
+                </div>
+
+                <div class="ticket-card">
+                    <div class="ticket-header">
+                        <h3 class="ticket-name">VÉ BUFFET TỐI</h3>
+                        <div class="ticket-price">599.000₫</div>
+                        <p class="ticket-description">Thời gian: 17:30 - 21:30 | Thực đơn cao cấp</p>
+                    </div>
+                    <ul class="menu-items">
+                        <li>Premium hải sản (tôm hùm, cua hoàng đế)</li>
+                        <li>Sashimi cao cấp & Wagyu beef</li>
+                        <li>Foie gras & Caviar</li>
+                        <li>Nướng BBQ premium</li>
+                        <li>Lẩu hải sản đặc biệt</li>
+                        <li>Món Pháp sang trọng</li>
+                        <li>Rượu vang & cocktail</li>
+                        <li>Bánh ngọt Pháp cao cấp</li>
+                        <li>Trái cây nhập khẩu</li>
+                        <li>Dịch vụ butler riêng</li>
+                    </ul>
+                </div>
+
+                <div class="ticket-card">
+                    <div class="ticket-header">
+                        <h3 class="ticket-name">VÉ BUFFET CUỐI TUẦN</h3>
+                        <div class="ticket-price">699.000₫</div>
+                        <p class="ticket-description">Thời gian: 11:00 - 22:00 | All-day experience</p>
+                    </div>
+                    <ul class="menu-items">
+                        <li>Toàn bộ thực đơn buffet tối</li>
+                        <li>King crab & Boston lobster</li>
+                        <li>Oyster tươi sống</li>
+                        <li>Thịt nướng Kobe beef</li>
+                        <li>Live station nấu theo yêu cầu</li>
+                        <li>Champagne & premium wine</li>
+                        <li>Show nấu ăn của đầu bếp</li>
+                        <li>Không giới hạn thời gian</li>
+                        <li>Ưu đãi sinh nhật đặc biệt</li>
+                        <li>Quà tặng cho trẻ em</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="booking">
+        <div class="container">
+            <h2 class="section-title fade-in">Đặt bàn</h2>
+            <div class="form-container fade-in">
+                <form id="bookingForm">
+                    <div class="form-grid">
                         <div class="form-group">
-                            <label for="username">Tên đăng nhập</label>
-                            <input type="text" id="username" class="form-control" placeholder="Nhập tên đăng nhập" required>
+                            <label for="customerName">Họ và tên *</label>
+                            <input type="text" id="customerName" name="customerName" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">Mật khẩu</label>
-                            <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu" required>
+                            <label for="phone">Số điện thoại *</label>
+                            <input type="tel" id="phone" name="phone" required>
                         </div>
-                        <div id="loginError" class="error-message hidden">
-                            Tên đăng nhập hoặc mật khẩu không đúng!
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 18px; font-size: 16px; font-weight: 600;">
-                            🔐 Đăng nhập
-                        </button>
-                    </form>
-                </div>
+                        <div class="form-group">
+                            <label for="guests">Số lượng khách *</label>
+                            <select id="guests" name="guests" required>
+                                <option value="">Chọn số khách</option>
+                                <option value="1">1 người</option>
+                                <option value="2">2 người</option>
+                                <option value="3">3 người</option>
+                                <option value="4">4 người</option>
+                                <option value="5">5 người</option>
+                                <option value="6">6 người</option>
+                                <option value="7">7 người</option>
+                                <option value="8">8 người</option>
+                                <option value="more">Trên 8 người</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Ngày đặt bàn *</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Giờ đặt bàn *</label>
+                            <select id="time" name="time" required>
+                                <option value="">Chọn giờ</option>
+                                <option value="11:00">11:00 - Buffet trưa</option>
+                                <option value="11:30">11:30 - Buffet trưa</option>
+                                <option value="12:00">12:00 - Buffet trưa</option>
+                                <option value="12:30">12:30 - Buffet trưa</option>
+                                <option value="13:00">13:00 - Buffet trưa</option>
+                                <option value="17:30">17:30 - Buffet tối</option>
+                                <option value="18:00">18:00 - Buffet tối</option>
+                                <option value="18:30">18:30 - Buffet tối</option>
+                                <option value="19:00">19:00 - Buffet tối</option>
+                                <option value="19:30">19:30 - Buffet tối</option>
+                                <option value="20:00">20:00 - Buffet tối</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ticketType">Loại vé *</label>
+                            <select id="ticketType" name="ticketType" required>
+                                <option value="">Chọn loại vé</option>
+                                <option value="lunch">Buffet trưa - 399.000₫</option>
+                                <option value="dinner">Buffet tối - 599.000₫</option>
+                                <option value="weekend">Buffet cuối tuần - 699.000₫</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="occasion">Dịp đặc biệt</label>
+                            <select id="occasion" name="occasion">
+                                <option value="">Chọn dịp (nếu có)</option>
+                                <option value="birthday">Sinh nhật</option>
+                                <option value="anniversary">Kỷ niệm</option>
+                                <option value="business">Tiệc công ty</option>
+                                <option value="date">Hẹn hò</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="notes">Ghi chú thêm</label>
+                            <textarea id="notes" name="notes" rows="4" placeholder="Yêu cầu đặc biệt, dị ứng thực phẩm, sở thích cá nhân..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button type="submit" class="submit-btn">Đặt bàn ngay</button>
+                        <div id="totalPrice" style="margin-top: 1rem; font-size: 1.2rem; font-weight: bold; color: #d4a574;"></div>
+                    </div>
+                    
+                    <div id="successMessage" class="success-message">
+                        ✅ Đặt bàn thành công! Chúng tôi sẽ liên hệ với bạn trong vòng 15 phút để xác nhận.
+                    </div>
+                </form>
             </div>
         </div>
+    </section>
 
-        <!-- Main Application -->
-        <div id="mainApp" class="hidden">
-            <div class="header">
-                <div class="logo">DHSoft Support</div>
-                <div class="user-info">
-                    <div class="user-avatar" id="userAvatar">U</div>
-                    <span class="user-name" id="userName">User</span>
-                    <button class="btn btn-secondary" onclick="logout()">
-                        🚪 Đăng xuất
-                    </button>
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GOLDEN BAY BUFFET</h3>
+                    <p>Nhà hàng buffet hải sản cao cấp</p>
+                    <p>🏆 Giải thưởng "Nhà hàng buffet tốt nhất 2024"</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liên hệ</h3>
+                    <p>📍 123 Đường Nguyễn Văn Cừ, Quận 1, TP.HCM</p>
+                    <p>📞 Hotline: 0901 234 567</p>
+                    <p>✉️ Email: info@goldenbaybuffet.vn</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Giờ mở cửa</h3>
+                    <p>🕐 Buffet trưa: 11:00 - 14:00</p>
+                    <p>🕕 Buffet tối: 17:30 - 21:30</p>
+                    <p>📅 Mở cửa 7 ngày/tuần</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Theo dõi chúng tôi</h3>
+                    <p><a href="#">Facebook</a></p>
+                    <p><a href="#">Instagram</a></p>
+                    <p><a href="#">YouTube</a></p>
+                    <p><a href="#">TikTok</a></p>
                 </div>
             </div>
-
-            <div class="main-content">
-                <div class="content-header">
-                    <h1 id="pageTitle">Danh sách Tickets</h1>
-                    <button class="btn btn-primary" onclick="showCreateTicket()">
-                        ➕ Tạo Ticket mới
-                    </button>
-                </div>
-
-                <div class="content-body">
-                    <div class="nav-tabs">
-                        <button class="nav-tab active" onclick="showTicketList()">
-                            📋 Danh sách Tickets
-                        </button>
-                        <button class="nav-tab" onclick="showCreateTicket()">
-                            ➕ Tạo Ticket
-                        </button>
-                    </div>
-
-                    <!-- Ticket List View -->
-                    <div id="ticketListView">
-                        <div id="ticketListContainer">
-                            <div class="ticket-list" id="ticketList">
-                                <!-- Tickets will be loaded here -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Create Ticket View -->
-                    <div id="createTicketView" class="hidden">
-                        <div id="successMessage" class="success-message hidden">
-                            Ticket đã được tạo thành công! Chúng tôi sẽ phản hồi trong thời gian sớm nhất.
-                        </div>
-                        
-                        <form class="ticket-form" id="ticketForm">
-                            <h2 style="margin-bottom: 30px; color: #1e293b; font-size: 24px;">📝 Tạo Ticket Hỗ trợ</h2>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="ticketTitle">Tiêu đề vấn đề *</label>
-                                    <input type="text" id="ticketTitle" class="form-control" 
-                                           placeholder="Nhập tiêu đề mô tả vấn đề" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ticketCategory">Danh mục hỗ trợ</label>
-                                    <select id="ticketCategory" class="form-control">
-                                        <option value="technical">🔧 Hỗ trợ kỹ thuật</option>
-                                        <option value="billing">💳 Thanh toán & Hóa đơn</option>
-                                        <option value="account">👤 Tài khoản & Bảo mật</option>
-                                        <option value="feature">✨ Yêu cầu tính năng</option>
-                                        <option value="general">📞 Hỗ trợ tổng quát</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Mức độ ưu tiên</label>
-                                <div class="priority-select" id="prioritySelect">
-                                    <div class="priority-option low" data-priority="low">
-                                        <div style="font-size: 20px; margin-bottom: 8px;">🟢</div>
-                                        <strong>Thấp</strong><br>
-                                        <small>Không gấp, có thể đợi</small>
-                                    </div>
-                                    <div class="priority-option medium selected" data-priority="medium">
-                                        <div style="font-size: 20px; margin-bottom: 8px;">🟡</div>
-                                        <strong>Trung bình</strong><br>
-                                        <small>Ưu tiên bình thường</small>
-                                    </div>
-                                    <div class="priority-option high" data-priority="high">
-                                        <div style="font-size: 20px; margin-bottom: 8px;">🔴</div>
-                                        <strong>Cao</strong><br>
-                                        <small>Rất gấp, cần xử lý ngay</small>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group form-group-full">
-                                <label for="ticketDescription">Mô tả chi tiết *</label>
-                                <textarea id="ticketDescription" class="form-control textarea" placeholder="Mô tả chi tiết vấn đề bạn gặp phải..." required></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary" style="margin-top: 20px;">
-                                🚀 Gửi Ticket
-                            </button>
-                        </form>
-                    </div>
-                </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Golden Bay Buffet. Tất cả quyền được bảo lưu.</p>
             </div>
         </div>
-
-        <!-- Ticket Detail Modal -->
-        <div class="modal" id="ticketDetailModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="modal-title" id="modalTicketTitle">Chi tiết Ticket</span>
-                    <button class="close-btn" onclick="closeTicketModal()">×</button>
-                </div>
-                <div class="modal-body" id="modalTicketBody">
-                    <!-- Ticket details will be loaded here -->
-                </div>
-            </div>
-        </div>
-    </div>
+    </footer>
 
     <script>
-        // Simple local "database"
-        let tickets = [];
-        let currentUser = null;
-        let ticketIdCounter = 1;
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 
-        // Dummy user for demo
-        const demoUser = {
-            username: "admin",
-            password: "123456",
-            name: "Admin",
+        // Fade-in animation on scroll
+        function revealOnScroll() {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 60) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('DOMContentLoaded', revealOnScroll);
+
+        // Giá vé theo loại
+        const ticketPrices = {
+            lunch: 399000,
+            dinner: 599000,
+            weekend: 699000
         };
 
-        // Login logic
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
-            if (username === demoUser.username && password === demoUser.password) {
-                currentUser = demoUser;
-                document.getElementById('loginScreen').classList.add('hidden');
-                document.getElementById('mainApp').classList.remove('hidden');
-                document.getElementById('userName').textContent = demoUser.name;
-                document.getElementById('userAvatar').textContent = demoUser.name[0].toUpperCase();
-                showTicketList();
+        // Tính tổng tiền khi chọn loại vé và số lượng khách
+        function updateTotalPrice() {
+            const guests = document.getElementById('guests').value;
+            const ticketType = document.getElementById('ticketType').value;
+            let price = 0;
+            if (ticketPrices[ticketType] && guests && !isNaN(guests)) {
+                let guestCount = guests === 'more' ? 8 : parseInt(guests);
+                price = ticketPrices[ticketType] * guestCount;
+                document.getElementById('totalPrice').textContent = 
+                    'Tổng tiền dự kiến: ' + price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND', maximumFractionDigits: 0});
             } else {
-                document.getElementById('loginError').classList.remove('hidden');
+                document.getElementById('totalPrice').textContent = '';
             }
-        });
-
-        function logout() {
-            currentUser = null;
-            document.getElementById('mainApp').classList.add('hidden');
-            document.getElementById('loginScreen').classList.remove('hidden');
-            document.getElementById('loginForm').reset();
-            document.getElementById('loginError').classList.add('hidden');
         }
+        document.getElementById('guests').addEventListener('change', updateTotalPrice);
+        document.getElementById('ticketType').addEventListener('change', updateTotalPrice);
 
-        // Tab navigation
-        function showTicketList() {
-            document.getElementById('pageTitle').textContent = "Danh sách Tickets";
-            document.getElementById('ticketListView').classList.remove('hidden');
-            document.getElementById('createTicketView').classList.add('hidden');
-            setActiveTab(0);
-            renderTicketList();
-        }
-
-        function showCreateTicket() {
-            document.getElementById('pageTitle').textContent = "Tạo Ticket mới";
-            document.getElementById('ticketListView').classList.add('hidden');
-            document.getElementById('createTicketView').classList.remove('hidden');
-            setActiveTab(1);
-            document.getElementById('ticketForm').reset();
-            document.getElementById('successMessage').classList.add('hidden');
-            // Reset priority selection
-            document.querySelectorAll('.priority-option').forEach(opt => opt.classList.remove('selected'));
-            document.querySelector('.priority-option.medium').classList.add('selected');
-        }
-
-        function setActiveTab(idx) {
-            const tabs = document.querySelectorAll('.nav-tab');
-            tabs.forEach((tab, i) => {
-                if (i === idx) tab.classList.add('active');
-                else tab.classList.remove('active');
-            });
-        }
-
-        // Priority selection
-        document.querySelectorAll('.priority-option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.priority-option').forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
-
-        // Ticket form submission
-        document.getElementById('ticketForm').addEventListener('submit', function(e) {
+        // Xử lý form đặt bàn
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const title = document.getElementById('ticketTitle').value.trim();
-            const category = document.getElementById('ticketCategory').value;
-            const description = document.getElementById('ticketDescription').value.trim();
-            const priority = document.querySelector('.priority-option.selected').getAttribute('data-priority');
-            if (!title || !description) return;
+            // Validate required fields
+            const name = document.getElementById('customerName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const guests = document.getElementById('guests').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const ticketType = document.getElementById('ticketType').value;
 
-            const ticket = {
-                id: ticketIdCounter++,
-                title,
-                category,
-                description,
-                priority,
-                status: "open",
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                user: currentUser ? currentUser.name : "Khách",
-            };
-            tickets.unshift(ticket);
-
-            document.getElementById('successMessage').classList.remove('hidden');
-            this.reset();
-            // Reset priority selection
-            document.querySelectorAll('.priority-option').forEach(opt => opt.classList.remove('selected'));
-            document.querySelector('.priority-option.medium').classList.add('selected');
-            setTimeout(() => {
-                document.getElementById('successMessage').classList.add('hidden');
-                showTicketList();
-            }, 1200);
-        });
-
-        // Render ticket list
-        function renderTicketList() {
-            const list = document.getElementById('ticketList');
-            list.innerHTML = '';
-            if (tickets.length === 0) {
-                list.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📭</div>
-                        <h3>Chưa có ticket nào!</h3>
-                        <p>Bạn có thể tạo ticket mới để nhận hỗ trợ từ đội ngũ DHSoft.</p>
-                    </div>
-                `;
+            if (!name || !phone || !guests || !date || !time || !ticketType) {
+                alert('Vui lòng điền đầy đủ các trường bắt buộc!');
                 return;
             }
-            tickets.forEach(ticket => {
-                const statusClass = {
-                    open: 'status-open',
-                    'in-progress': 'status-in-progress',
-                    closed: 'status-closed'
-                }[ticket.status] || 'status-open';
-                const priorityClass = {
-                    low: 'priority-low',
-                    medium: 'priority-medium',
-                    high: 'priority-high'
-                }[ticket.priority] || 'priority-medium';
-                list.innerHTML += `
-                    <div class="ticket-item" onclick="showTicketDetail(${ticket.id})">
-                        <div class="ticket-header">
-                            <div>
-                                <div class="ticket-title">${escapeHTML(ticket.title)}</div>
-                                <div class="ticket-id">#${ticket.id}</div>
-                            </div>
-                            <div class="ticket-status ${statusClass}">
-                                ${ticket.status === 'open' ? 'Mở' : ticket.status === 'in-progress' ? 'Đang xử lý' : 'Đã đóng'}
-                            </div>
-                        </div>
-                        <div class="ticket-meta">
-                            <div class="ticket-meta-left">
-                                <span class="priority-badge ${priorityClass}">
-                                    ${ticket.priority === 'low' ? 'Thấp' : ticket.priority === 'medium' ? 'Trung bình' : 'Cao'}
-                                </span>
-                                <span>🗂️ ${getCategoryLabel(ticket.category)}</span>
-                            </div>
-                            <span>🕒 ${formatDate(ticket.createdAt)}</span>
-                        </div>
-                    </div>
-                `;
-            });
-        }
 
-        // Show ticket detail modal
-        function showTicketDetail(id) {
-            const ticket = tickets.find(t => t.id === id);
-            if (!ticket) return;
-            document.getElementById('modalTicketTitle').textContent = `Ticket #${ticket.id} - ${ticket.title}`;
-            document.getElementById('modalTicketBody').innerHTML = `
-                <div class="ticket-detail">
-                    <div class="detail-section">
-                        <h3>📝 Thông tin Ticket</h3>
-                        <div class="detail-grid">
-                            <div class="detail-item">
-                                <span class="detail-label">Người tạo</span>
-                                <span class="detail-value">${escapeHTML(ticket.user)}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Ngày tạo</span>
-                                <span class="detail-value">${formatDate(ticket.createdAt, true)}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Danh mục</span>
-                                <span class="detail-value">${getCategoryLabel(ticket.category)}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Mức ưu tiên</span>
-                                <span class="detail-value">${getPriorityLabel(ticket.priority)}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">Trạng thái</span>
-                                <span class="detail-value">${getStatusLabel(ticket.status)}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-section">
-                        <h3>📄 Mô tả chi tiết</h3>
-                        <div class="detail-description">${escapeHTML(ticket.description)}</div>
-                    </div>
-                </div>
-            `;
-            document.getElementById('ticketDetailModal').classList.add('show');
-        }
+            // Hiển thị thông báo thành công
+            document.getElementById('successMessage').style.display = 'block';
+            // Ẩn sau 5 giây
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
 
-        function closeTicketModal() {
-            document.getElementById('ticketDetailModal').classList.remove('show');
-        }
-
-        // Utility functions
-        function getCategoryLabel(val) {
-            switch(val) {
-                case 'technical': return '🔧 Hỗ trợ kỹ thuật';
-                case 'billing': return '💳 Thanh toán & Hóa đơn';
-                case 'account': return '👤 Tài khoản & Bảo mật';
-                case 'feature': return '✨ Yêu cầu tính năng';
-                case 'general': return '📞 Hỗ trợ tổng quát';
-                default: return val;
-            }
-        }
-        function getPriorityLabel(val) {
-            switch(val) {
-                case 'low': return 'Thấp';
-                case 'medium': return 'Trung bình';
-                case 'high': return 'Cao';
-                default: return val;
-            }
-        }
-        function getStatusLabel(val) {
-            switch(val) {
-                case 'open': return 'Mở';
-                case 'in-progress': return 'Đang xử lý';
-                case 'closed': return 'Đã đóng';
-                default: return val;
-            }
-        }
-        function formatDate(date, showTime) {
-            const d = new Date(date);
-            const pad = n => n < 10 ? '0' + n : n;
-            let str = `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`;
-            if (showTime) str += ` ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-            return str;
-        }
-        function escapeHTML(str) {
-            return String(str).replace(/[&<>"']/g, function(m) {
-                return ({
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#39;'
-                })[m];
-            });
-        }
-
-        // Close modal on outside click
-        document.getElementById('ticketDetailModal').addEventListener('click', function(e) {
-            if (e.target === this) closeTicketModal();
+            // Reset form
+            this.reset();
+            document.getElementById('totalPrice').textContent = '';
         });
 
-        // Keyboard: ESC to close modal
-        document.addEventListener('keydown', function(e) {
-            if (e.key === "Escape") closeTicketModal();
-        });
-
-        // Auto focus on login
-        window.onload = function() {
-            document.getElementById('username').focus();
-        };
+        // Ngăn chọn ngày trong quá khứ
+        document.getElementById('date').setAttribute('min', new Date().toISOString().split('T')[0]);
     </script>
 </body>
 </html>
